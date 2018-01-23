@@ -1,3 +1,4 @@
+import * as Constants from '../constants'
 export const styles = {
   allNotesContainer: {
     flex: 1,
@@ -13,7 +14,7 @@ export const styles = {
     fontSize: 16
   },
 
-  addNotesContainer: {
+  createNoteContainer: {
     flex: 1,
     backgroundColor: '#ffffff'
   },
@@ -35,5 +36,23 @@ export const styles = {
     marginBottom: 60,
     fontSize: 16,
     textAlignVertical: 'top'
+  },
+  normalTitle: {},
+  editModeTitle: {
+    marginTop: 50,
+    marginRight: 70,
+    fontSize: 25
+  },
+  header: {
+    backgroundColor: Constants.COLOR_PRIMARY
+  },
+  editModeHeader: {
+    backgroundColor: Constants.COLOR_PRIMARY,
+    height: 200
+  },
+  updateNormal: {},
+  updateInEditMode: {
+    color: Constants.COLOR_BLACK,
+    marginBottom: 100
   }
 }

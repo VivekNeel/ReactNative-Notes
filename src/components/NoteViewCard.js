@@ -12,7 +12,7 @@ export default class NoteViewCard extends PureComponent {
   handleGoto() {
     this
       .props
-      .onPressBtn(this.props.id, this.props.title, this.props.description)
+      .onPressBtn(this.props.id, this.props.title, this.props.description, this.props.time)
   }
   render() {
     const {title, description, id, keys, time} = this.props

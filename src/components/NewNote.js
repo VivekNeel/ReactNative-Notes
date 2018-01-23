@@ -13,7 +13,7 @@ import {Text, View, TextInput, Button} from 'react-native'
 import {connect} from 'react-redux'
 
 import {styles} from './styles'
-import {addNote} from '../actions'
+import {createNote} from '../actions'
 
 class NewNote extends PureComponent {
   constructor(props) {
@@ -25,13 +25,9 @@ class NewNote extends PureComponent {
     }
   }
 
-  componentDidMount() {
-    console.log('this.props.navigation', this.props)
-  }
-
   render() {
     return (
-      <Container style={styles.addNotesContainer}>
+      <Container style={styles.createNoteContainer}>
         <Header style={{
           backgroundColor: 'white'
         }}/>
@@ -62,7 +58,7 @@ class NewNote extends PureComponent {
           <Button
             title="addNote"
             onPress={this
-            .addNote
+            .createNote
             .bind(this)}/>
 
         </Content>
@@ -71,10 +67,10 @@ class NewNote extends PureComponent {
     )
   }
 
-  addNote() {
+  createNote() {
     this
       .props
-      .addNote({
+      .createNote({
         title: this.state.title,
         description: this.state.desc,
         time: "Today at : " + moment().format('HH:mm a')
@@ -86,4 +82,4 @@ class NewNote extends PureComponent {
   }
 }
 
-export default connect(null, {addNote})(NewNote)
+export default connect(null, {createNote})(NewNote)

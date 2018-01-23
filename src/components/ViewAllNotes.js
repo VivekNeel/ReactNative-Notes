@@ -25,13 +25,16 @@ import SingleNote from './ViewSingleNote'
 import Card from './NoteViewCard'
 import {deleteNote} from '../actions'
 import {styles} from './styles'
+import * as Constants from '../constants'
 
 class AllNotes extends Component {
-
   renderHeader() {
+
     return (
-      <Header style={{
-        backgroundColor: 'white'
+      <Header
+        androidStatusBarColor={Constants.COLOR_PRIMARY_DARK}
+        style={{
+        backgroundColor: Constants.COLOR_PRIMARY
       }}>
 
         <Left >
@@ -91,14 +94,15 @@ class AllNotes extends Component {
       .navigate("NewNote")
   }
 
-  goToNote(noteId, title, description) {
+  goToNote(noteId, title, description, time) {
     this
       .props
       .navigator
       .navigate("SingleNote", {
         noteId: noteId,
         title: title,
-        description: description
+        description: description,
+        time: time
       })
 
   }
@@ -138,9 +142,9 @@ class AllNotes extends Component {
           dataSource={dataSource}
           renderRow={(note, sectionID, rowID) => {
           return (<Card
+            time={note.time}
             title={note.title}
             description={note.description}
-            time={note.time}
             id={note.id}
             keys={rowID}
             onPressBtn={this

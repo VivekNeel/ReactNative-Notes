@@ -4,7 +4,7 @@ export const UPDATE_NOTE = 'UPDATE_NOTE'
 export const LOAD_STORED = 'LOAD_STORED'
 export const DELETE_NOTE = 'DELETE_NOTE'
 
-export function addNote(newNote) {
+export function createNote(newNote) {
   return {type: ADD_NOTES, payload: newNote}
 }
 
