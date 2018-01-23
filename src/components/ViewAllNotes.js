@@ -38,7 +38,14 @@ class AllNotes extends Component {
       }}>
 
         <Left >
-          <Button title=""></Button>
+          <Button
+            title=""
+            style={{
+            backgroundColor: 'transparent'
+          }}
+            onPress={() => {
+            console.log('button pressed')
+          }}></Button>
 
         </Left>
         <Body>

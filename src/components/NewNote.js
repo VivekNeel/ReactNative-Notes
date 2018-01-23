@@ -31,7 +31,9 @@ class NewNote extends PureComponent {
   render() {
     return (
       <Container style={styles.createNoteContainer}>
-        <Header style={{
+        <Header
+          androidStatusBarColor={Constants.COLOR_PRIMARY_DARK}
+          style={{
           backgroundColor: Constants.COLOR_PRIMARY
         }}>
           <Right>
