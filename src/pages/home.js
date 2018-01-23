@@ -12,27 +12,18 @@ import {
 } from 'native-base'
 
 import React, {PureComponent} from 'react'
+import ViewAllNotes from '../components/ViewAllNotes'
 
 class home extends PureComponent {
 
   render() {
+
     return (
       <Container>
-        <Header style={{
-          backgroundColor: 'white'
-        }}>
-          <Left>
-            <Text>Notes</Text>
-          </Left>
-          <Right>
-            <Button
-              title="Drawer"
-              onPress={() => {
-              console.log('open drawer')
-            }}></Button>
 
-          </Right>
-        </Header>
+        <Content>
+          <ViewAllNotes navigator={this.props.navigation}/>
+        </Content>
 
       </Container>
     )

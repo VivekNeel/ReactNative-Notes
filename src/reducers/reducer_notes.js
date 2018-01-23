@@ -16,10 +16,11 @@ export default(state = initialState, action) => {
 
     case UPDATE_NOTE:
       const newArray = _.remove(state, (data) => {
-        console.log('data', data)
+        console.log('newArr', data, action.payload)
         return data.id != action.payload.id
       });
-      console.log('data', newArray)
+
+      console.log('hello', newArray)
 
       const updatedNote = Object.assign({}, {
         id: newArray.length
@@ -30,11 +31,12 @@ export default(state = initialState, action) => {
       return updatedState
 
     case DELETE_NOTE:
-      console.log('get request');
-      console.log(action.payload)
       const deletedNewArray = _.remove(state, (data) => {
+        console.log('hello', data, action.payload);
+
         return data.id != action.payload
       });
+      console.log('hello', deletedNewArray);
       return deletedNewArray
 
     default:
