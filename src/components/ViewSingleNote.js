@@ -94,17 +94,15 @@ class SingleNote extends PureComponent {
           ? styles.header
           : styles.editModeHeader)}>
           <Body>
-            {!this.state.editPressed && <Title
-              style={(this.state.editPressed
-              ? styles.normalTitle
-              : styles.editModeTitle)}>{this.state.title}
+            {!this.state.editPressed && <Title style={styles.editModeTitle}>{this.state.title}
             </Title>
 }
-            {!this.state.editPressed && <Text
+            {!this.state.editPressed && <Title
               style={{
               fontSize: 10,
-              marginLeft: 16
-            }}>{this.state.time}</Text>}
+              marginRight: 20,
+              color: Constants.COLOR_GRAY
+            }}>{this.state.time}</Title>}
           </Body>
 
           <Right>
@@ -143,7 +141,6 @@ class SingleNote extends PureComponent {
 
   updateNote() {
     if (this.state.changed) {
-      console.log('here')
       this
         .props
         .updateNote({

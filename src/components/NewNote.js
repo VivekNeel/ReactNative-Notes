@@ -9,11 +9,12 @@ import {
 
 import moment from 'moment'
 import React, {PureComponent} from 'react'
-import {Text, View, TextInput, Button} from 'react-native'
+import {Text, View, TextInput, Button, TouchableWithoutFeedback} from 'react-native'
 import {connect} from 'react-redux'
 
 import {styles} from './styles'
 import {createNote} from '../actions'
+import * as Constants from '../constants'
 
 class NewNote extends PureComponent {
   constructor(props) {
@@ -25,12 +26,26 @@ class NewNote extends PureComponent {
     }
   }
 
+  static navigationOptions = ({header: null});
+
   render() {
     return (
       <Container style={styles.createNoteContainer}>
         <Header style={{
-          backgroundColor: 'white'
-        }}/>
+          backgroundColor: Constants.COLOR_PRIMARY
+        }}>
+          <Right>
+            <TouchableWithoutFeedback
+              onPress={this
+              .createNote
+              .bind(this)}>
+              <Text>
+                save
+              </Text>
+            </TouchableWithoutFeedback>
+
+          </Right>
+        </Header>
 
         <Content style={styles.textInputContainer}>
           <TextInput
@@ -52,15 +67,6 @@ class NewNote extends PureComponent {
             underlineColorAndroid="transparent"
             onChangeText={(text) => this.setState({desc: text})}
             value={this.state.desc}/>
-        </Content>
-
-        <Content style={styles.inputScreenBtnContainer}>
-          <Button
-            title="addNote"
-            onPress={this
-            .createNote
-            .bind(this)}/>
-
         </Content>
 
       </Container>
