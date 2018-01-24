@@ -41,7 +41,8 @@ export const styles = {
   editModeTitle: {
     marginTop: 50,
     marginRight: 70,
-    fontSize: 25
+    fontSize: 25,
+    color: Constants.COLOR_BLACK
   },
   header: {
     backgroundColor: Constants.COLOR_PRIMARY
@@ -54,5 +55,20 @@ export const styles = {
   updateInEditMode: {
     color: Constants.COLOR_BLACK,
     marginBottom: 100
+  },
+  container: {
+    flexDirection: 'column',
+    flex: 1
+  },
+
+  drawerContentText: {
+    margin: 20,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  drawerContentTextSelected: {
+    margin: 20,
+    color: 'green',
+    alignSelf: 'center'
   }
 }

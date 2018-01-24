@@ -1,5 +1,12 @@
 import React, {Component, PureComponent} from 'react'
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native'
+import {
+  View,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  StyleSheet,
+  Image
+} from 'react-native'
 import * as Constants from '../constants'
 
 export default class NoteViewCard extends PureComponent {
@@ -16,7 +23,6 @@ export default class NoteViewCard extends PureComponent {
   }
   render() {
     const {title, description, id, keys, time} = this.props
-    console.log('here', this.props)
 
     const background = (keys % 2 == 0)
       ? {
@@ -25,7 +31,9 @@ export default class NoteViewCard extends PureComponent {
       : {
         backgroundColor: '#f2f2f2'
       }
-
+    if (!title) {
+      return null
+    }
     return (
       <TouchableOpacity
         onPress={this
@@ -46,8 +54,24 @@ export default class NoteViewCard extends PureComponent {
               justifyContent: 'flex-end',
               alignItems: 'center'
             }}>
-              <Image source={require("../images/sfilled.png")} style={styles.image}></Image>
-              <Image source={require("../images/ffilled.png")} style={styles.image}></Image>
+
+              <TouchableHighlight
+                onPress={() => {
+                this
+                  .props
+                  .addStarredNote(this.props.note)
+              }}>
+                <Image source={require("../images/sfilled.png")} style={styles.image}></Image>
+              </TouchableHighlight>
+
+              <TouchableHighlight
+                onPress={() => {
+                this
+                  .props
+                  .addFavNote(this.props.note)
+              }}>
+                <Image source={require("../images/ffilled.png")} style={styles.image}></Image>
+              </TouchableHighlight>
 
             </View>
 

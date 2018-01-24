@@ -5,6 +5,7 @@ import {
   Right,
   Title,
   Left,
+
   Content
 } from 'native-base'
 
@@ -13,7 +14,9 @@ import {
   Text,
   View,
   Alert,
+  Platform,
   ListView,
+  ScrollView,
   Button,
   TouchableHighlight,
   Image
@@ -23,11 +26,22 @@ import {connect} from 'react-redux'
 import NewNote from './NewNote'
 import SingleNote from './ViewSingleNote'
 import Card from './NoteViewCard'
-import {deleteNote} from '../actions'
+import {deleteNote, pushFavourite, getAllNotes} from '../actions'
 import {styles} from './styles'
 import * as Constants from '../constants'
+import DrawerLayout from 'react-native-drawer-layout';
 
 class AllNotes extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      applyClicked: false,
+      filterClicked: false,
+      favouriteSelected: false,
+      starredSelected: false
+    }
+  }
   renderHeader() {
 
     return (
@@ -36,8 +50,7 @@ class AllNotes extends Component {
         style={{
         backgroundColor: Constants.COLOR_PRIMARY
       }}>
-
-        <Left >
+        {Platform.OS === "ios" && <Left >
           <Button
             title=""
             style={{
@@ -47,7 +60,8 @@ class AllNotes extends Component {
             console.log('button pressed')
           }}></Button>
 
-        </Left>
+        </Left>}
+
         <Body>
           <Title
             style={{
@@ -70,7 +84,11 @@ class AllNotes extends Component {
             }}></Image>
           </TouchableHighlight>
 
-          <TouchableHighlight onPress={console.log('onfilter')}>
+          <TouchableHighlight
+            onPress={() => {
+            if (this.drawer) 
+              this.drawer.openDrawer()
+          }}>
             <Image
               source={require("../images/filter.png")}
               style={{
@@ -87,9 +105,8 @@ class AllNotes extends Component {
     return (
       <Container style={styles.allNotesContainer}>
         {this.renderHeader()}
-        <Content >
-          {this.renderList()}
-        </Content>
+
+        {this.renderDrawer()}
       </Container>
     )
   }
@@ -125,10 +142,102 @@ class AllNotes extends Component {
     ])
   }
 
+  addFavNote(note) {
+    note.markedFav = true
+    this
+      .props
+      .pushFavourite(note)
+  }
+
+  addStarredNote(note) {
+    note.markedStarred = true
+    this
+      .props
+      .pushFavourite(note)
+  }
   deleteNote(noteId) {
     this
       .props
       .deleteNote(noteId)
+  }
+
+  renderDrawer() {
+    const navigationView = (
+      <View style={[styles.container]}>
+        <TouchableHighlight
+          onPress={() => {
+          this.setState({
+            filterClicked: true,
+            favouriteSelected: false,
+            starredSelected: false
+          }, () => {
+            if (this.drawer) {
+              this
+                .drawer
+                .closeDrawer()
+            }
+            this
+              .props
+              .getAllNotes()
+          })
+        }}>
+          <Text style={styles.drawerContentText}>Filter X</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          onPress={() => {
+          this.setState({
+            favouriteSelected: !this.state.favouriteSelected
+          })
+        }}>
+          <Text
+            style={(this.state.favouriteSelected
+            ? styles.drawerContentTextSelected
+            : styles.drawerContentText)}>Favourite</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          onPress={() => {
+          this.setState({
+            starredSelected: !this.state.starredSelected
+          })
+        }}>
+          <Text
+            style={(this.state.starredSelected
+            ? styles.drawerContentTextSelected
+            : styles.drawerContentText)}>Starred</Text>
+        </TouchableHighlight>
+        <Button
+          title="Apply"
+          onPress={() => {
+          this.setState({
+            applyClicked: true
+          }, () => {
+            if (this.drawer) {
+              this
+                .drawer
+                .closeDrawer()
+            }
+            this
+              .props
+              .getAllNotes()
+          })
+        }}></Button>
+
+      </View>
+    );
+
+    return (
+      <DrawerLayout
+        drawerBackgroundColor="#212121"
+        drawerWidth={300}
+        ref={drawer => {
+        return (this.drawer = drawer);
+      }}
+        keyboardDismissMode="on-drag"
+        statusBarBackgroundColor="blue"
+        renderNavigationView={() => navigationView}>
+        {this.renderList()}
+      </DrawerLayout>
+    );
   }
 
   renderList() {
@@ -142,7 +251,43 @@ class AllNotes extends Component {
       var ds = new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 !== r2
       });
-      var dataSource = ds.cloneWithRows(this.props.notes) || []
+      var dataSource
+      if (this.state.applyClicked) {
+
+        if (this.state.favouriteSelected && this.state.starredSelected) {
+
+          var filteredArray = this
+            .props
+            .notes
+            .filter((item) => {
+              return item.markedFav && item.markedStarred
+            })
+          dataSource = ds.cloneWithRows(filteredArray) || []
+        } else if (this.state.favouriteSelected) {
+          var a = this
+            .props
+            .notes
+            .filter((item) => {
+              return item.markedFav
+            })
+          dataSource = ds.cloneWithRows(a) || []
+        } else if (this.state.starredSelected) {
+          var filteredStarred = this
+            .props
+            .notes
+            .filter((item) => {
+              return item.markedStarred
+            })
+          dataSource = ds.cloneWithRows(filteredStarred) || []
+
+        } else {
+          dataSource = ds.cloneWithRows(this.props.notes) || []
+        }
+      } else {
+        dataSource = ds.cloneWithRows(this.props.notes) || []
+      }
+
+      console.log(this.props.notes)
 
       return (
         <ListView
@@ -153,6 +298,13 @@ class AllNotes extends Component {
             title={note.title}
             description={note.description}
             id={note.id}
+            note={note}
+            addStarredNote={this
+            .addStarredNote
+            .bind(this)}
+            addFavNote={this
+            .addFavNote
+            .bind(this)}
             keys={rowID}
             onPressBtn={this
             .goToNote
@@ -170,4 +322,4 @@ function mapStateToProps(state) {
   return {notes: state.allNotes}
 }
 
-export default connect(mapStateToProps, {deleteNote})(AllNotes)
+export default connect(mapStateToProps, {deleteNote, pushFavourite, getAllNotes})(AllNotes)

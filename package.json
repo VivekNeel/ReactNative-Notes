@@ -9,12 +9,18 @@
     "test": "node node_modules/jest/bin/jest.js --watch"
   },
   "dependencies": {
+    "moment": "^2.20.1",
     "native-base": "^2.3.7",
     "react": "16.2.0",
     "react-native": "0.52.0",
+    "react-native-drawer-layout": "^2.0.0",
     "react-navigation": "^1.0.0-beta.27",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-orm": "^0.9.4",
+    "redux-storage": "^4.1.2",
+    "redux-storage-engine-reactnativeasyncstorage": "^1.0.5",
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
     "babel-jest": "22.1.0",
