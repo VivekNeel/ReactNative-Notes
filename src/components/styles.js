@@ -38,9 +38,15 @@ export const styles = {
     textAlignVertical: 'top'
   },
   normalTitle: {},
+  normalTime: {
+    fontSize: 10,
+    marginLeft: 40,
+    color: Constants.COLOR_GRAY
+  },
   editModeTitle: {
-    marginTop: 50,
-    marginRight: 70,
+    marginTop: 40,
+    marginLeft: 40,
+    width: 250,
     fontSize: 25,
     color: Constants.COLOR_BLACK
   },
@@ -54,7 +60,7 @@ export const styles = {
   updateNormal: {},
   updateInEditMode: {
     color: Constants.COLOR_BLACK,
-    marginBottom: 100
+    marginBottom: 120
   },
   container: {
     flexDirection: 'column',
@@ -70,5 +76,10 @@ export const styles = {
     margin: 20,
     color: 'green',
     alignSelf: 'center'
+  },
+  viewNoteDesc: {
+    fontSize: 20,
+    margin: 40,
+    color: Constants.COLOR_GRAY
   }
 }

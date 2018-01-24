@@ -5,11 +5,10 @@ import {
   Right,
   Title,
   Left,
-
   Content
 } from 'native-base'
 
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import {
   Text,
   View,
@@ -32,7 +31,7 @@ import * as Constants from '../constants'
 import DrawerLayout from 'react-native-drawer-layout';
 import HomePageHeader from '../components/HomePageHeader'
 
-class AllNotes extends Component {
+class AllNotes extends PureComponent {
 
   constructor(props) {
     super(props)

@@ -13,16 +13,9 @@ import {styles} from './styles'
 import {updateNote} from '../actions'
 import * as Constants from '../constants'
 import moment from 'moment'
+import Header from '../components/SingleNoteHeader'
 
-import {
-  Container,
-  Header,
-  Body,
-  Right,
-  Title,
-  Left,
-  Content
-} from 'native-base'
+import {Container, Content} from 'native-base'
 
 class SingleNote extends PureComponent {
   constructor(props) {
@@ -38,24 +31,12 @@ class SingleNote extends PureComponent {
     }
   }
 
-  static navigationOptions = ({
-    title: ``,
-    headerStyle: {
-      backgroundColor: '#ffffff'
-    },
-    header: null
-  });
+  static navigationOptions = ({header: null});
 
   renderNoteView() {
     return (
-      <Content style={{
-        margin: 25
-      }}>
-        <Text
-          style={{
-          fontSize: 20,
-          color: Constants.COLOR_GRAY
-        }}>{this.state.desc}</Text>
+      <Content>
+        <Text style={styles.viewNoteDesc}>{this.state.desc}</Text>
       </Content>
     )
   }
@@ -85,46 +66,24 @@ class SingleNote extends PureComponent {
     )
   }
 
+  onEditClicked() {
+    this.setState({editPressed: true})
+  }
+
   render() {
     return (
       <Container style={styles.createNoteContainer}>
+
         <Header
-          androidStatusBarColor={Constants.COLOR_PRIMARY_DARK}
-          style={(this.state.editPressed
-          ? styles.header
-          : styles.editModeHeader)}>
-          <Body>
-            {!this.state.editPressed && <Title style={styles.editModeTitle}>{this.state.title}
-            </Title>
-}
-            {!this.state.editPressed && <Title
-              style={{
-              fontSize: 10,
-              marginRight: 20,
-              color: Constants.COLOR_GRAY
-            }}>{this.state.time}</Title>}
-          </Body>
-
-          <Right>
-            {!this.state.editPressed && <TouchableHighlight
-              onPress={() => {
-              console.log('edit clicked');
-              this.setState({editPressed: true});
-            }}>
-              <Text style={styles.updateInEditMode}>edit</Text>
-            </TouchableHighlight>}
-
-            {this.state.editPressed && <TouchableHighlight
-              onPress={this
-              .updateNote
-              .bind(this)}>
-              <Text style={{
-                color: Constants.COLOR_BLACK
-              }}>save</Text>
-            </TouchableHighlight>}
-          </Right>
-        </Header>
-
+          title={this.state.title}
+          time={this.state.time}
+          navigation={this.props.navigation}
+          onEditClicked={this
+          .onEditClicked
+          .bind(this)}
+          updateNote={this
+          .updateNote
+          .bind(this)}></Header>
         {!this.state.editPressed && this.renderNoteView()
 }
         {this.state.editPressed && this.renderEditModeView()}
