@@ -79,7 +79,9 @@ export const styles = {
   },
   viewNoteDesc: {
     fontSize: 20,
-    margin: 40,
+    marginLeft: 50,
+    marginRight: 20,
+    marginTop: 20,
     color: Constants.COLOR_GRAY
   },
   headerBack: {

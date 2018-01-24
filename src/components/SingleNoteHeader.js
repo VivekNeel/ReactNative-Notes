@@ -25,6 +25,7 @@ export default class extends PureComponent {
           flexDirection: 'column'
         }}>
           <Icon
+            style={styles.headerBack}
             onPress={() => {
             this
               .props
