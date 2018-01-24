@@ -81,5 +81,8 @@ export const styles = {
     fontSize: 20,
     margin: 40,
     color: Constants.COLOR_GRAY
+  },
+  headerBack: {
+    marginTop: 10
   }
 }

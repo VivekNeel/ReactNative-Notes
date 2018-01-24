@@ -4,6 +4,7 @@ import {
   Body,
   Right,
   Left,
+  Icon,
   Content
 } from 'native-base'
 
@@ -36,6 +37,15 @@ class NewNote extends PureComponent {
           style={{
           backgroundColor: Constants.COLOR_PRIMARY
         }}>
+          <Icon
+            style={styles.headerBack}
+            onPress={() => {
+            this
+              .props
+              .navigation
+              .goBack()
+          }}
+            name="arrow-back"/>
           <Right>
             <TouchableWithoutFeedback
               onPress={this
