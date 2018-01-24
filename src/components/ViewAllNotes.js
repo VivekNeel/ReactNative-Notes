@@ -18,6 +18,7 @@ import {
   ScrollView,
   Button,
   TouchableHighlight,
+  Dimensions,
   Image
 } from 'react-native'
 import {connect} from 'react-redux'
@@ -81,7 +82,8 @@ class AllNotes extends PureComponent {
 
   }
 
-  longPressNote(noteId) {
+  onDeletePressed(noteId) {
+    console.log('onDeletePressed')
     Alert.alert('Delete Note', 'Do you want to delete this note?', [
       {
         text: 'YES',
@@ -265,8 +267,8 @@ class AllNotes extends PureComponent {
             onPressBtn={this
             .itemClicked
             .bind(this)}
-            onLongPressBtn={this
-            .longPressNote
+            onDeletePressed={this
+            .onDeletePressed
             .bind(this)}/>)
         }}/>
       )

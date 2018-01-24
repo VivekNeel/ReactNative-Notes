@@ -8,6 +8,7 @@ import {
   Image
 } from 'react-native'
 import * as Constants from '../constants'
+import Swipeout from 'react-native-swipeout';
 
 const images = [require("../images/star_selected.png"), require("../images/star.png"), require("../images/fav_selected.png"), require("../images/fav.png")]
 
@@ -20,10 +21,11 @@ export default class NoteViewCard extends PureComponent {
       favSelected: false
     }
   }
-  handleLongPress() {
+  handleDeletePress() {
+    console.log('delete pressed')
     this
       .props
-      .onLongPressBtn(this.props.note.id)
+      .onDeletePressed(this.props.note.id)
   }
 
   handleGoto() {
@@ -92,40 +94,54 @@ export default class NoteViewCard extends PureComponent {
 
     }
 
-    return (
-      <TouchableOpacity
-        onPress={this
-        .handleGoto
-        .bind(this)}
-        onLongPress={this
-        .handleLongPress
-        .bind(this)}>
-        <View style={[styles.cardContainer, background]}>
-          <View style={styles.cardTitleContainer}>
-            <Text style={styles.cardTitle} numberOfLines={1}>
-              {note
-                .title
-                .toUpperCase()}
-            </Text>
+    let buttons = [
+      {
+        text: 'Delete',
+        backgroundColor: 'red',
+        underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+        onPress: () => {
+          this
+            .props
+            .onDeletePressed(this.props.note.id)
+        }
+      }
+    ];
 
-            <View style={styles.imageContainer}>
-              {star}
-              {fav}
+    return (
+      <Swipeout
+        autoClose={true}
+        onClose={() => console.log('===close')}
+        left={buttons}>
+        <TouchableOpacity onPress={this
+          .handleGoto
+          .bind(this)}>
+          <View style={[styles.cardContainer, background]}>
+            <View style={styles.cardTitleContainer}>
+              <Text style={styles.cardTitle} numberOfLines={1}>
+                {note
+                  .title
+                  .toUpperCase()}
+              </Text>
+
+              <View style={styles.imageContainer}>
+                {star}
+                {fav}
+              </View>
+
+            </View>
+            <View style={styles.cardDescriptionContainer}>
+              <Text style={styles.cardDescription} numberOfLines={2}>
+                {(note.description.length > 150)
+                  ? note.description.slice(0, 150) + '...'
+                  : note.description}
+              </Text>
+              <Text style={styles.cardDescription}>{note.time}
+              </Text>
             </View>
 
           </View>
-          <View style={styles.cardDescriptionContainer}>
-            <Text style={styles.cardDescription} numberOfLines={2}>
-              {(note.description.length > 150)
-                ? note.description.slice(0, 150) + '...'
-                : note.description}
-            </Text>
-            <Text style={styles.cardDescription}>{note.time}
-            </Text>
-          </View>
-
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </Swipeout>
     )
   }
 

@@ -64,7 +64,8 @@ export const styles = {
   },
   container: {
     flexDirection: 'column',
-    flex: 1
+    flex: 1,
+    backgroundColor: 'red'
   },
 
   drawerContentText: {
