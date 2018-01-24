@@ -30,6 +30,7 @@ import {deleteNote, pushFavourite, getAllNotes} from '../actions'
 import {styles} from './styles'
 import * as Constants from '../constants'
 import DrawerLayout from 'react-native-drawer-layout';
+import HomePageHeader from '../components/HomePageHeader'
 
 class AllNotes extends Component {
 
@@ -44,61 +45,13 @@ class AllNotes extends Component {
   }
   renderHeader() {
 
-    return (
-      <Header
-        androidStatusBarColor={Constants.COLOR_PRIMARY_DARK}
-        style={{
-        backgroundColor: Constants.COLOR_PRIMARY
-      }}>
-        {Platform.OS === "ios" && <Left >
-          <Button
-            title=""
-            style={{
-            backgroundColor: 'transparent'
-          }}
-            onPress={() => {
-            console.log('button pressed')
-          }}></Button>
-
-        </Left>}
-
-        <Body>
-          <Title
-            style={{
-            fontSize: 20,
-            color: 'black'
-          }}>Notely</Title>
-        </Body>
-
-        <Right >
-          <TouchableHighlight
-            onPress={this
-            .addNewNote
-            .bind(this)}>
-            <Image
-              source={require("../images/create.png")}
-              style={{
-              width: 20,
-              height: 20,
-              marginRight: 20
-            }}></Image>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-            onPress={() => {
-            if (this.drawer) 
-              this.drawer.openDrawer()
-          }}>
-            <Image
-              source={require("../images/filter.png")}
-              style={{
-              width: 20,
-              height: 20
-            }}></Image>
-          </TouchableHighlight>
-        </Right>
-      </Header>
-    )
+    return (<HomePageHeader
+      onCreateNotePressed={this
+      .onCreateNotePressed
+      .bind(this)}
+      onFilterPressed={this
+      .onFilterPressed
+      .bind(this)}/>)
   }
 
   render() {
@@ -109,7 +62,7 @@ class AllNotes extends Component {
     )
   }
 
-  addNewNote() {
+  onCreateNotePressed() {
     this
       .props
       .navigator
@@ -138,6 +91,14 @@ class AllNotes extends Component {
         text: 'No'
       }
     ])
+  }
+
+  onFilterPressed() {
+    if (this.drawer) {
+      this
+        .drawer
+        .openDrawer()
+    }
   }
 
   addFavNote(note) {
