@@ -41,11 +41,7 @@ export default(state = initialState, action) => {
       return deletedNewArray
 
     case NOTE_ALL:
-      console.log("teste")
       const aaa = [...state]
-      console.log('note all', aaa);
-
-      console.log('aaa', aaa);
       return aaa
 
     default:

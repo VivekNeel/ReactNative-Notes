@@ -22,7 +22,6 @@ export default class NoteViewCard extends PureComponent {
     }
   }
   handleDeletePress() {
-    console.log('delete pressed')
     this
       .props
       .onDeletePressed(this.props.note.id)
@@ -108,10 +107,7 @@ export default class NoteViewCard extends PureComponent {
     ];
 
     return (
-      <Swipeout
-        autoClose={true}
-        onClose={() => console.log('===close')}
-        left={buttons}>
+      <Swipeout autoClose={true} left={buttons}>
         <TouchableOpacity onPress={this
           .handleGoto
           .bind(this)}>

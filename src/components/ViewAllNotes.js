@@ -83,7 +83,6 @@ class AllNotes extends PureComponent {
   }
 
   onDeletePressed(noteId) {
-    console.log('onDeletePressed')
     Alert.alert('Delete Note', 'Do you want to delete this note?', [
       {
         text: 'YES',
@@ -248,8 +247,6 @@ class AllNotes extends PureComponent {
       } else {
         dataSource = ds.cloneWithRows(this.props.notes) || []
       }
-
-      console.log(this.props.notes)
 
       return (
         <ListView
