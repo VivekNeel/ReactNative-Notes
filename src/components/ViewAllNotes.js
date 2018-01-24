@@ -68,15 +68,15 @@ class AllNotes extends PureComponent {
       .navigate("NewNote")
   }
 
-  goToNote(noteId, title, description, time) {
+  itemClicked(note) {
     this
       .props
       .navigator
       .navigate("SingleNote", {
-        noteId: noteId,
-        title: title,
-        description: description,
-        time: time
+        noteId: note.id,
+        title: note.title,
+        description: note.description,
+        time: note.time
       })
 
   }
@@ -254,10 +254,6 @@ class AllNotes extends PureComponent {
           dataSource={dataSource}
           renderRow={(note, sectionID, rowID) => {
           return (<Card
-            time={note.time}
-            title={note.title}
-            description={note.description}
-            id={note.id}
             note={note}
             addStarredNote={this
             .addStarredNote
@@ -267,7 +263,7 @@ class AllNotes extends PureComponent {
             .bind(this)}
             keys={rowID}
             onPressBtn={this
-            .goToNote
+            .itemClicked
             .bind(this)}
             onLongPressBtn={this
             .longPressNote

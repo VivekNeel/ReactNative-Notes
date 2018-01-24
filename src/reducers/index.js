@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
 import NotesReducer from './noteReducer'
-import CurrentNoteReducer from './reducer_current'
+import CurrentNoteReducer from './singleNoteReducer'
 
 const rootReducer = combineReducers({allNotes: NotesReducer, currentNote: CurrentNoteReducer})
 

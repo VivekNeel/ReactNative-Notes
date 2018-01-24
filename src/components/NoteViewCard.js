@@ -9,20 +9,31 @@ import {
 } from 'react-native'
 import * as Constants from '../constants'
 
+const images = [require("../images/star_selected.png"), require("../images/star.png"), require("../images/fav_selected.png"), require("../images/fav.png")]
+
 export default class NoteViewCard extends PureComponent {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      starSelected: false,
+      favSelected: false
+    }
+  }
   handleLongPress() {
     this
       .props
-      .onLongPressBtn(this.props.id)
+      .onLongPressBtn(this.props.note.id)
   }
 
   handleGoto() {
     this
       .props
-      .onPressBtn(this.props.id, this.props.title, this.props.description, this.props.time)
+      .onPressBtn(this.props.note)
   }
+
   render() {
-    const {title, description, id, keys, time} = this.props
+    const {note, keys} = this.props
 
     const background = (keys % 2 == 0)
       ? {
@@ -31,9 +42,56 @@ export default class NoteViewCard extends PureComponent {
       : {
         backgroundColor: '#f2f2f2'
       }
-    if (!title) {
-      return null
+    let star = null
+    if (note.markedStarred || this.state.starSelected) {
+      star = <TouchableHighlight
+        onPress={() => {
+        this
+          .props
+          .addStarredNote(this.props.note);
+        this.setState({starSelected: true})
+      }}>
+        <Image source={images[0]} style={styles.image}></Image>
+      </TouchableHighlight>
+
+    } else {
+      star = <TouchableHighlight
+        onPress={() => {
+        this
+          .props
+          .addStarredNote(this.props.note);
+        this.setState({starSelected: true})
+      }}>
+        <Image source={images[1]} style={styles.image}></Image>
+      </TouchableHighlight>
+
     }
+
+    let fav = null
+    if (note.markedFav || this.state.favSelected) {
+      fav = <TouchableHighlight
+        onPress={() => {
+        this
+          .props
+          .addFavNote(this.props.note);
+        this.setState({favSelected: true})
+      }}>
+        <Image source={images[2]} style={styles.image}></Image>
+      </TouchableHighlight>
+
+    } else {
+      fav = <TouchableHighlight
+        onPress={() => {
+        this
+          .props
+          .addFavNote(this.props.note);
+        this.setState({favSelected: true})
+      }}>
+        <Image source={images[3]} style={styles.image}></Image>
+      </TouchableHighlight>
+
+    }
+
     return (
       <TouchableOpacity
         onPress={this
@@ -45,44 +103,24 @@ export default class NoteViewCard extends PureComponent {
         <View style={[styles.cardContainer, background]}>
           <View style={styles.cardTitleContainer}>
             <Text style={styles.cardTitle} numberOfLines={1}>
-              {title.toUpperCase()}
+              {note
+                .title
+                .toUpperCase()}
             </Text>
 
-            <View
-              style={{
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-              alignItems: 'center'
-            }}>
-
-              <TouchableHighlight
-                onPress={() => {
-                this
-                  .props
-                  .addStarredNote(this.props.note)
-              }}>
-                <Image source={require("../images/sfilled.png")} style={styles.image}></Image>
-              </TouchableHighlight>
-
-              <TouchableHighlight
-                onPress={() => {
-                this
-                  .props
-                  .addFavNote(this.props.note)
-              }}>
-                <Image source={require("../images/ffilled.png")} style={styles.image}></Image>
-              </TouchableHighlight>
-
+            <View style={styles.imageContainer}>
+              {star}
+              {fav}
             </View>
 
           </View>
           <View style={styles.cardDescriptionContainer}>
             <Text style={styles.cardDescription} numberOfLines={2}>
-              {(description.length > 150)
-                ? description.slice(0, 150) + '...'
-                : description}
+              {(note.description.length > 150)
+                ? note.description.slice(0, 150) + '...'
+                : note.description}
             </Text>
-            <Text style={styles.cardDescription}>{time}
+            <Text style={styles.cardDescription}>{note.time}
             </Text>
           </View>
 
@@ -125,5 +163,10 @@ const styles = StyleSheet.create({
   image: {
     width: 20,
     height: 20
+  },
+  imageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   }
 })
