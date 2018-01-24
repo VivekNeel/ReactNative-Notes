@@ -227,6 +227,7 @@ class AllNotes extends Component {
       <DrawerLayout
         drawerBackgroundColor="#212121"
         drawerWidth={300}
+        drawerPosition={"right"}
         ref={drawer => {
         return (this.drawer = drawer);
       }}
