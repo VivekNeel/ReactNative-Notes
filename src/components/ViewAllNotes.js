@@ -104,8 +104,6 @@ class AllNotes extends Component {
   render() {
     return (
       <Container style={styles.allNotesContainer}>
-        {this.renderHeader()}
-
         {this.renderDrawer()}
       </Container>
     )
@@ -235,6 +233,7 @@ class AllNotes extends Component {
         keyboardDismissMode="on-drag"
         statusBarBackgroundColor="blue"
         renderNavigationView={() => navigationView}>
+        {this.renderHeader()}
         {this.renderList()}
       </DrawerLayout>
     );
