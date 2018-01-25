@@ -10,7 +10,7 @@ import {
 
 import moment from 'moment'
 import React, {PureComponent} from 'react'
-import {Text, View, TextInput, Button, TouchableWithoutFeedback} from 'react-native'
+import {Text, View, TextInput, Button, TouchableHighlight} from 'react-native'
 import {connect} from 'react-redux'
 
 import {styles} from './styles'
@@ -37,6 +37,23 @@ class NewNote extends PureComponent {
     }
   }
 
+  onSaveClicked() {
+    if (this.isTitleOrDescEmpty()) {
+      Toast.show(Constants.ERROR_MESSAGES.NEW_NOTE.ERROR_MESSAGE_NO_TITLE_DESC)
+    } else {
+      this
+        .props
+        .createNote({
+          title: this.state.title,
+          description: this.state.desc,
+          time: "Today at : " + moment().format('HH:mm a')
+        })
+      this
+        .props
+        .navigation
+        .goBack()
+    }
+  }
   render() {
     return (
       <Container style={styles.createNoteContainer}>
@@ -54,14 +71,14 @@ class NewNote extends PureComponent {
           }}
             name="arrow-back"/>
           <Right>
-            <TouchableWithoutFeedback
-              onPress={(this.isTitleOrDescEmpty()
-              ? Toast.show(Constants.ERROR_MESSAGES.NEW_NOTE.ERROR_MESSAGE_NO_TITLE_DESC)
-              : this.createNote.bind(this))}>
+            <TouchableHighlight
+              onPress={() => {
+              this.onSaveClicked()
+            }}>
               <Text>
                 save
               </Text>
-            </TouchableWithoutFeedback>
+            </TouchableHighlight>
 
           </Right>
         </Header>
@@ -90,20 +107,6 @@ class NewNote extends PureComponent {
 
       </Container>
     )
-  }
-
-  createNote() {
-    this
-      .props
-      .createNote({
-        title: this.state.title,
-        description: this.state.desc,
-        time: "Today at : " + moment().format('HH:mm a')
-      })
-    this
-      .props
-      .navigation
-      .goBack()
   }
 }
 
