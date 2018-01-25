@@ -62,13 +62,13 @@ export default class HomePageHeader extends PureComponent {
 
 const styles = StyleSheet.create({
   filter: {
-    width: 20,
-    height: 20
+    width: 25,
+    height: 25
   },
   create: {
-    width: 20,
-    height: 20,
-    marginRight: 20
+    width: 25,
+    height: 25,
+    marginRight: 30
   },
   title: {
     fontSize: 20,

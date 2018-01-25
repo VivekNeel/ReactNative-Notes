@@ -103,9 +103,11 @@ export const styles = {
   },
 
   image: {
-    width: 20,
-    height: 20
+    width: 30,
+    height: 30,
+    marginRight: 15
   },
+
   imageContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
