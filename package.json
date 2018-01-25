@@ -8,17 +8,28 @@
     "ios": "react-native run-ios",
     "test": "node node_modules/jest/bin/jest.js --watch"
   },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
+  },
   "dependencies": {
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "lodash": "^4.17.4",
     "moment": "^2.20.1",
     "native-base": "^2.3.7",
     "react": "16.2.0",
     "react-native": "0.52.0",
     "react-native-drawer-layout": "^2.0.0",
+    "react-native-root-toast": "^3.0.0",
+    "react-native-swipeout": "^2.3.3",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.0-beta.27",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
-    "redux-orm": "^0.9.4",
     "redux-storage": "^4.1.2",
     "redux-storage-engine-reactnativeasyncstorage": "^1.0.5",
     "reselect": "^3.0.1"
