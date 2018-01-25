@@ -19,9 +19,7 @@ export default class HomePageHeader extends PureComponent {
     return (
       <Header
         androidStatusBarColor={Constants.COLOR_PRIMARY_DARK}
-        style={{
-        backgroundColor: Constants.COLOR_PRIMARY
-      }}>
+        style={styles.headerContainer}>
         {Platform.OS === "ios" && <Left >
           <Button
             title=""
@@ -71,11 +69,15 @@ const styles = StyleSheet.create({
     marginRight: 30
   },
   title: {
-    fontSize: 20,
-    color: 'black'
+    fontSize: 30,
+    color: 'black',
+    fontFamily: "k22 didoni"
   },
   header: {
     backgroundColor: 'transparent'
 
+  },
+  headerContainer: {
+    backgroundColor: Constants.COLOR_PRIMARY
   }
 })

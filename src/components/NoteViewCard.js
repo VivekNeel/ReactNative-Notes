@@ -125,10 +125,8 @@ export default class NoteViewCard extends PureComponent {
 
             </View>
             <View style={styles.cardDescriptionContainer}>
-              <Text style={styles.cardDescription} numberOfLines={2}>
-                {(note.description.length > 150)
-                  ? note.description.slice(0, 150) + '...'
-                  : note.description}
+              <Text style={styles.cardDescription} ellipsizeMode={'tail'} numberOfLines={1}>
+                {note.description}
               </Text>
               <Text style={styles.cardTime}>{note.time}
               </Text>

@@ -124,6 +124,7 @@ export const styles = {
   cardDescriptionContainer: {},
   cardDescription: {
     fontSize: 15,
+    flex: 1,
     color: Constants.COLOR_DARK_GRAY,
     marginBottom: 5,
     flexDirection: 'column',
