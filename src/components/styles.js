@@ -39,7 +39,7 @@ export const styles = {
   },
   normalTitle: {},
   normalTime: {
-    fontSize: 10,
+    fontSize: 13,
     marginLeft: 40,
     color: Constants.COLOR_GRAY
   },
@@ -47,6 +47,7 @@ export const styles = {
     marginTop: 40,
     marginLeft: 40,
     width: 250,
+    fontWeight: 'bold',
     fontSize: 25,
     color: Constants.COLOR_BLACK
   },
@@ -60,12 +61,12 @@ export const styles = {
   updateNormal: {},
   updateInEditMode: {
     color: Constants.COLOR_BLACK,
-    marginBottom: 120
+    marginBottom: 150
   },
   container: {
     flexDirection: 'column',
-    flex: 1,
-    backgroundColor: 'red'
+    backgroundColor: '#212121',
+    marginTop: 40
   },
 
   drawerContentText: {
@@ -83,9 +84,65 @@ export const styles = {
     marginLeft: 50,
     marginRight: 20,
     marginTop: 20,
-    color: Constants.COLOR_GRAY
+    color: Constants.COLOR_DARK_GRAY
   },
   headerBack: {
-    marginTop: 10
+    marginTop: 15
+  },
+  cardContainer: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 15,
+    paddingBottom: 15,
+    borderBottomWidth: 1,
+    borderColor: Constants.COLOR_GRAY
+  },
+  cardTitleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
+  },
+
+  image: {
+    width: 20,
+    height: 20
+  },
+  imageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  cardTitle: {
+    fontSize: 23,
+    fontWeight: "bold",
+    marginBottom: 5,
+    flex: 1,
+    color: '#000000',
+    marginLeft: 20
+  },
+  cardDescriptionContainer: {},
+  cardDescription: {
+    fontSize: 15,
+    color: Constants.COLOR_DARK_GRAY,
+    marginBottom: 5,
+    flexDirection: 'column',
+    marginLeft: 20
+  },
+  cardTime: {
+    fontSize: 13,
+    color: Constants.COLOR_GRAY,
+    marginBottom: 5,
+    flexDirection: 'column',
+    marginLeft: 20
+  },
+  applyButton: {
+    borderColor: 'white',
+    borderWidth: 1,
+    justifyContent: 'center',
+    width: 100,
+    height: 40,
+    alignSelf: 'center'
+  },
+  applyText: {
+    color: 'white'
   }
 }

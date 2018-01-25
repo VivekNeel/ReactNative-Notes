@@ -5,6 +5,7 @@ import {
   Right,
   Title,
   Left,
+  Button,
   Content
 } from 'native-base'
 
@@ -16,7 +17,6 @@ import {
   Platform,
   ListView,
   ScrollView,
-  Button,
   TouchableHighlight,
   Dimensions,
   Image
@@ -166,6 +166,7 @@ class AllNotes extends PureComponent {
         </TouchableHighlight>
         <Button
           title="Apply"
+          style={styles.applyButton}
           onPress={() => {
           this.setState({
             applyClicked: true
@@ -179,7 +180,9 @@ class AllNotes extends PureComponent {
               .props
               .getAllNotes()
           })
-        }}></Button>
+        }}>
+          <Text style={styles.applyText}>Apply</Text>
+        </Button>
 
       </View>
     );

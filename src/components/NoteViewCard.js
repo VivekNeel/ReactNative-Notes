@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import * as Constants from '../constants'
 import Swipeout from 'react-native-swipeout';
+import {styles} from '../components/styles'
 
 const images = [require("../images/star_selected.png"), require("../images/star.png"), require("../images/fav_selected.png"), require("../images/fav.png")]
 
@@ -114,9 +115,7 @@ export default class NoteViewCard extends PureComponent {
           <View style={[styles.cardContainer, background]}>
             <View style={styles.cardTitleContainer}>
               <Text style={styles.cardTitle} numberOfLines={1}>
-                {note
-                  .title
-                  .toUpperCase()}
+                {note.title}
               </Text>
 
               <View style={styles.imageContainer}>
@@ -131,7 +130,7 @@ export default class NoteViewCard extends PureComponent {
                   ? note.description.slice(0, 150) + '...'
                   : note.description}
               </Text>
-              <Text style={styles.cardDescription}>{note.time}
+              <Text style={styles.cardTime}>{note.time}
               </Text>
             </View>
 
@@ -142,43 +141,3 @@ export default class NoteViewCard extends PureComponent {
   }
 
 }
-
-const styles = StyleSheet.create({
-  cardContainer: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 15,
-    paddingBottom: 15,
-    borderBottomWidth: 1,
-    borderColor: Constants.COLOR_GRAY
-  },
-  cardTitleContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start'
-  },
-  cardTitle: {
-    fontSize: 20,
-    fontWeight: "400",
-    marginBottom: 5,
-    flex: 1,
-    color: '#000000',
-    marginLeft: 20
-  },
-  cardDescriptionContainer: {},
-  cardDescription: {
-    fontSize: 13,
-    color: '#BDBDBD',
-    marginBottom: 5,
-    flexDirection: 'column',
-    marginLeft: 20
-  },
-  image: {
-    width: 20,
-    height: 20
-  },
-  imageContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  }
-})

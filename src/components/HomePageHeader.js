@@ -25,9 +25,7 @@ export default class HomePageHeader extends PureComponent {
         {Platform.OS === "ios" && <Left >
           <Button
             title=""
-            style={{
-            backgroundColor: 'transparent'
-          }}
+            style={styles.header}
             onPress={() => {
             console.log('button pressed')
           }}></Button>
@@ -75,5 +73,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     color: 'black'
+  },
+  header: {
+    backgroundColor: 'transparent'
+
   }
 })
