@@ -83,7 +83,7 @@ class AllNotes extends PureComponent {
   }
 
   onDeletePressed(noteId) {
-    Alert.alert('Delete Note', 'Do you want to delete this note?', [
+    Alert.alert('Delete Note', 'Are you sure you want to delete this note?', [
       {
         text: 'YES',
         onPress: () => this.deleteNote(noteId)

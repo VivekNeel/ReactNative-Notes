@@ -16,6 +16,8 @@ import {connect} from 'react-redux'
 import {styles} from './styles'
 import {createNote} from '../actions'
 import * as Constants from '../constants'
+import {isEmpty} from 'lodash'
+import Toast from 'react-native-root-toast'
 
 class NewNote extends PureComponent {
   constructor(props) {
@@ -29,6 +31,12 @@ class NewNote extends PureComponent {
 
   static navigationOptions = ({header: null});
 
+  isTitleOrDescEmpty() {
+    if (isEmpty(this.state.title) || isEmpty(this.state.desc)) {
+      return true
+    }
+  }
+
   render() {
     return (
       <Container style={styles.createNoteContainer}>
@@ -40,17 +48,16 @@ class NewNote extends PureComponent {
           <Icon
             style={styles.headerBack}
             onPress={() => {
-            this
-              .props
-              .navigation
-              .goBack()
+            (this.isTitleOrDescEmpty()
+              ? Toast.show(Constants.ERROR_MESSAGES.NEW_NOTE.ERROR_MESSAGE_NO_TITLE_DESC)
+              : this.props.navigation.goBack())
           }}
             name="arrow-back"/>
           <Right>
             <TouchableWithoutFeedback
-              onPress={this
-              .createNote
-              .bind(this)}>
+              onPress={(this.isTitleOrDescEmpty()
+              ? Toast.show(Constants.ERROR_MESSAGES.NEW_NOTE.ERROR_MESSAGE_NO_TITLE_DESC)
+              : this.createNote.bind(this))}>
               <Text>
                 save
               </Text>
